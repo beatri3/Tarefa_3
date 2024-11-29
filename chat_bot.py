@@ -3,43 +3,29 @@ from datetime import datetime
 
 def obter_resposta(texto: str) -> str:
     comando: str = texto.lower()
-    # if comando in ('olá', 'boa tarde', 'bom dia'):
-    #     return 'Olá tudo bem!'
-    # if comando == 'como estás':
-    #     return 'Estou bem, obrigado!'
-    # if comando == 'como te chamas':
-    #     return 'O meu nome é: Bot :)'
-    # if comando == 'tempo':
-    #     return 'Está um dia de sol!'
-    # if comando in ('bye', 'adeus', 'tchau'):
-    #     return 'Gostei de falar contigo! Até breve...'
-    # if 'horas' in comando:
-    #     return f'São: {datetime.now():%H:%M} horas'
-    # if 'data' in comando:
-    #     return f'Hoje é dia: {datetime.now():%d-%m-%Y}'
-
-    # return f'Desculpa, não entendi a questão! {texto}'
 
     respostas = {
-        ('olá', 'boa tarde', 'bom dia'): 'Olá tudo bem!',
-        'como estás': 'Estou bem, obrigado!',
+        ('ola', 'boa tarde', 'bom dia'): 'Olá tudo bem!',
+        ('bye', 'adeus', 'tchau'): 'Gostei de falar contigo! Até breve...',
+        ('quantos planetas no sistema solar', 'planetas no sistema solar'): 'Existem 8 planetas no Sistema Solar.',
+        
+        'como estas': 'Estou bem, obrigado!',
         'como te chamas': 'O meu nome é: Bot :)',
         'tempo': 'Está um dia de sol!',
-        ('bye', 'adeus', 'tchau'): 'Gostei de falar contigo! Até breve...'
+        'horas': f'São: {datetime.now():%H:%M} horas',
+        'data': f'Hoje é dia: {datetime.now():%d-%m-%Y}',
+        'quantos continentes existem': 'De acordo com o Modelo Continental mais comum existem 7 continentes!',
+        'diz-me uma curiosidade': 'No Barreiro, em Portugal, o sol põe-se 20 segundos mais cedo do que em qualquer outro lugar do mundo, devido à sua localização geográfica.',
+        'quantos anos durou o imperio romano': 'O Império Romano durou cerca de 500 anos, desde 27 a.C. até 476 d.C.',
+        'capital de portugal': 'A capital de Portugal é Lisboa.'
     }
+    
+    if comando in respostas:
+        return respostas[comando]
 
     for chave, resposta in respostas.items():
-        if isinstance(chave, tuple):
-            if comando in chave:
-                return resposta
-        elif chave in comando:
+        if isinstance(chave, tuple) and comando in chave:
             return resposta
-
-    if 'horas' in comando:
-        return f'São: {datetime.now():%H:%M} horas'
-
-    if 'data' in comando:
-        return f'Hoje é dia: {datetime.now():%d-%m-%Y}'
 
     return f'Desculpa, não entendi a questão! {texto}'
 
